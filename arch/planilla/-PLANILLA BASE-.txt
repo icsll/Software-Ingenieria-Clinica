@@ -1,0 +1,4 @@
+Código de equipo | Fecha de revisión
+Marca | Sede
+Modelo | Sector
+Número de serie | Ubicación

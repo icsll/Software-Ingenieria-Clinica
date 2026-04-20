@@ -1,0 +1,21 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo
+Filtros | Revisar y limpiar filtros
+Teclado y trackball | Revisar funcionamiento y limpiar los mismos
+Ruedas | Verificar buen desplazamiento y estado
+Transductores | Verificar imágen obtenida en todos los transductores
+Impresora | Imprimir imagen de prueba
+Limpieza | Realizar limpieza exterior e interior del equipo
+Cable de alimentación| Inspeccionar el estado de cable y enchufe
+UPS | Verificar conexión a UPS/UPS central
+Conectividad | Verificar conexión a PACS y MWL
+[BASE DE DATOS]
+ENCABEZADOS: Ítem | %/Gb
+Memoria 
+[ACCESORIOS]
+ENCABEZADOS: Tipo | Modelo | SN | Estado
+TRA-LIN-011 |  PLT-7045Bt | 99B1362519
+TRA-LIN-057 |  PLT-1005Bt | FSF2594173
+TRA-CON-008 |  PVT-375Bt | FMC1883207
+TRA-INT-016 | PVT-781VTE | FSA1682944

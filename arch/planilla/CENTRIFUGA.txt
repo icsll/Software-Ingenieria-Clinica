@@ -1,0 +1,21 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo
+Montaje y apoyo | Revisar integridad y disposición de la superficie de apoyo, evaluando si es seguro
+Cable de alimentación y enchufe | No debe apreciarse suciedad ni desgaste excesivos
+Etiquetado | Inspeccionar el estado de las etiquetas
+Display e indicadores | Realizar inspección visual y funcional de display, serigrafía, indicadores y teclado de membrana
+Motor y rotor | Revisar las condiciones físicas y el correcto funcionamiento de estos componentes
+Tapa y sistema de traba | Revisar el estado físico de la tapa, bisagras y cerradura. Comprobar el correcto funcionamiento de los sistemas de seguridad
+Alarmas | Verificar que las alarmas correspondientes al equipo se activen de forma correcta y que los indicadores visuales y auditivos sean reconocibles
+Freno | Chequear la acción del freno mecánico o eléctrico, con desaceleración uniforme y en un tiempo adecuado
+Accesorios | Verificar presencia y estado de los accesorios. No debería existir dificultad en la colocación de estos
+
+[EQUIPAMIENTO USADO PARA MEDIR]
+ENCABEZADOS: Equipamiento | Detalle | Fecha de calibración
+Tacómetro |
+
+[PRUEBAS CUANTITATIVAS]
+ENCABEZADOS: Ítem | Evaluación | Resultado | V1 | M1 | V2 | M2 |  V3 | M3
+Tiempo [min:seg] | Con un cronómetro, verificar que el tiempo de funcionamiento (M) de la centrífuga no difiera más de un 10% respecto al programado (V).
+Velocidad [rpm] | Verificar, mediante un tacómetro, que la velocidad real (M) del rotor no difiera más de un 10% respecto a la programada (V).

@@ -1,0 +1,19 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa.
+Etiquetado | Inspeccionar el estado de las etiquetas.
+Display e indicadores | Verificar display, serigrafía, indicadores y teclado, según corresponda.
+Accesorios | Verificar presencia y estado de los accesorios. 
+Filtros | Limpieza y cambio de ser necesario.
+Cable de alimentación | Verificar estado.
+Alarmas | Verificar correcta activación de alarmas correspondientes.
+Batería | Cambio de batería si corresponde.
+Termostato | Debe cortar calentamiento al alcanzar una temperatura elevada.
+Flujo | Verificar salida de aire caliente.
+
+[PRUEBAS DE TEMPERATURA]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+34°C | Verificar temp. ±1°C de la programada.
+40°C | Verificar temp. ±1°C de la programada.
+45°C | Verificar temp. ±1°C de la programada.
+47°C | Verificar temp. ±1°C de la programada.

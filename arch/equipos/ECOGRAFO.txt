@@ -1,0 +1,28 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+ECOGRAF-001| Toshiba Aplio 300 #F3C1862068| CID | Ecografía | Aplio 300 #F3C1862068             | CID-Consult-Cons17
+ECOGRAF-003| Toshiba Xario 660 #LGM11Z5056| Angelus | Internacion | Xario 660 #LGM11Z5056             | Angelus-Intern-Gral
+ECOGRAF-006| Toshiba Xario 200 #99B14Y3924| CID | Ecografía | Xario 200 #99B14Y3924             | CID-Consult-Cons8
+ECOGRAF-007| Esaote Mylab X5 #341487| Angelus | Quirofano | Mylab X5 #341487             | Angelus-Quirofano-Gral
+ECOGRAF-011| Philips HD7XE #CL53100388| Nordelta | Ecografía | HD7XE #CL53100388             | Nordelta-Consult-Cons21
+ECOGRAF-016| Siemens Acuson #CL53100388| Pilar | Ecografía | HD7XE #CL53100388             | Pilar-Consult-Cons11
+ECOGRAF-019| Toshiba Xario 200 #99B1483603| Sanatorio | Ecografía | Xario 200 #99B1483603             | Sanatorio-Consult-Cons10
+ECOGRAF-020| Toshiba Xario 300 #N1A1363609| Sanatorio | Ecografía | Xario 300 #N1A1363609             | CID-Consult-Cons3
+ECOGRAF-021| Philips Affiniti 30 #US419E1112| Sanatorio | Ecografía | Affiniti 30 #USO225E1485             | Sanatorio-Consult-Cons10
+ECOGRAF-028| Philips Toshiba Xario 660 #LGM1184568| Sanatorio | Quirofano | Xario 660 #LGM1184568             | Sanatorio-Quirofano-Gral
+ECOGRAF-029| Philips HD7XE #US20631513| Sanatorio | Hemodinamia | HD7XE #US20631513             | Sanatorio-Hemo-Gral
+ECOGRAF-030| Esaote Mylab X5 #342124| Nordelta | Quirofano | Mylab X5 #342124             | Nordelta-Quirofano-Gral
+ECOGRAF-032| Mindray M8 #CS8-19001108| Cardiologia | Consultorios | M8 #CS8-19001108             | Cardiologia-Consult-Cons8
+ECOGRAF-034| Mindray M8 #CS8-1300091| Cardiologia | Consultorios | M8 #CS8-13000913             | Cardiologia-Consult-Cons14
+ECOGRAF-036| Mindray M8 #CS8-19001107| Cardiologia | Consultorios | M8 #CS8-19001107             | Cardiologia-Consult-Cons17
+ECOGRAF-037| General Electric Vivid T8 #6008582WX0| Cardiologia | Consult | Vivid T8 #6008582WX0             | Cardiologia-Consult-Cons9
+ECOGRAF-038| General Electric VIVID S5 #8425VS5| Nordelta | Ecografía | VIVID S5 #8425VS5             | Nordelta-Consult-Cons22
+ECOGRAF-039| General Electric VIVID S5 #3425VS5| Pilar | Ecografía | VIVID S5 #3425VS5             | Pilar-Consult-Cons15
+ECOGRAF-040| Philips Affiniti 30 #USO24E2534| CID | Ecografía | Affiniti 30 #USO24E2534             | CID-Consult-Cons1
+ECOGRAF-041| Philips Affiniti 30 #USO24E0269| CID | Ecografía | Affiniti 30 #USO24E0269             | CID-Consult-Cons2
+ECOGRAF-042| Philips Affiniti 30 #USO225E1486| Cardiologia | Consultorios | Affiniti 30 #USO225E1486             | Cardiologia-Consult-Cons5
+ECOGRAF-043| Philips Affiniti 30 #USO225E1488| Cardiologia | Consultorios | Affiniti 30 #USO225E1488             | Cardiologia-Consult-Cons15
+ECOGRAF-044| Philips Affiniti 30 #USO225E1485| Cardiologia | Consultorios | Affiniti 30 #USO225E1485             | Cardiologia-Consult-Cons21
+ECOGRAF-045| Philips Affiniti 30 #USO225E1487| Cardiologia | Consultorios | Affiniti 30 #USO225E1487             | Cardiologia-Consult-Cons11
+ECOGRAF-046| Philips Affiniti 30 #USO225R1721| Sanatorio | UCO | Affiniti 30 #USO225R1721             | Sanatorio-UCO-Gral

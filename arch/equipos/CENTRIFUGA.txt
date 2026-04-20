@@ -1,0 +1,21 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+CENTRIF-001 | Arcano TDL-4 #JY005          | Sanatorio | Hemoterapia  | TDL-4 #JY005              | Sanatorio-Hemoterapia-Gral
+CENTRIF-002 | Presvac DCS-16-RV #31023     | Sanatorio | Hemoterapia  | DCS-16-RV #31023          | Sanatorio-Hemoterapia-Gral
+CENTRIF-003 | Presvac DCA-300 RVT #35687   | Sanatorio | Laboratorio  | DCA-300 RVT #35687        | Sanatorio-Preanalitica-Labo
+CENTRIF-004 | Presvac DCA-300 RVT #35689   | Sanatorio | Laboratorio  | DCA-300 RVT #35689        | Sanatorio-Procesamiento-Labo
+CENTRIF-005 | Giumelli Z29D #1987          | Pilar     | Laboratorio  | Z29D #1987                | Pilar-Analitica-Labo
+CENTRIF-006 | Giumelli Z29D #874           | Pilar     | Laboratorio  | Z29D #874                 | Pilar-Analitica-Labo
+CENTRIF-007 | Giumelli Z29D #905           | Pilar     | Laboratorio  | Z29D #905                 | Pilar-Analitica-Labo
+CENTRIF-008 | Giumelli Z29D #906           | Nordelta  | Laboratorio  | Z29D #906                 | Nordelta-Prenalitica-Labo
+CENTRIF-009 | Giumelli Z29D #3474          | Nordelta  | Laboratorio  | Z29D #3474                | Nordelta-Prenalitica-Labo
+CENTRIF-010 | Giumelli Z29D #220303B       | Sanatorio | Laboratorio  | Z29D #220303B             | SANATORIO-PROCESAMIENTO-LABO
+CENTRIF-011 | Giumelli Z29D #004           | Sanatorio | Laboratorio  | Z29D #004                 | SANATORIO-PROCESAMIENTO-LABO
+CENTRIF-012 | Presvac DCA-300 RVT #35747   | Nordelta  | Laboratorio  | DCA-300 RVT #35747        | Nordelta-Preanalitica-Labo
+CENTRIF-013 | Presvac DCA-300 RVT #35801   | Sanatorio | Hemoterapia  | DCA-300 RVT #35801        | Sanatorio-Hemoterapia-Gral
+CENTRIF-014 | Presvac DCA-300 RVT #35688   | Sanatorio | Laboratorio  | DCA-300 RVT #35688        | Sanatorio-Procesamiento-Labo
+CENTRIF-015 | Presvac DCA-300 RVT #35686   | Sanatorio | Laboratorio  | DCA-300 RVT #35686        | Sanatorio-Procesamiento-Labo
+CENTRIF-016 | Presvac DCA-300 RVT #35797   | Pilar     | Laboratorio  | DCA-300 RVT #35797        | Pilar-Analitica-Labo
+CENTRIF-017 | Presvac DCA-300 RVT #35796   | Pilar     | Laboratorio  | DCA-300 RVT #35796        | Pilar-Analitica-Labo
+CENTRIF-018 | Presvac Presvac DCA-300 RVT #35798 | Nordelta  | Laboratorio  | Presvac DCA-300 RVT #35798 | Nordelta-Preanalitica-Labo

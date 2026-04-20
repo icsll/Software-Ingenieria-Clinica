@@ -1,0 +1,8 @@
+Nuevo tecnico
+
+Ignacio Bergara
+imagenes/firmas/nacho.png
+Enrique Godoy
+imagenes/firmas/enri.png
+Milagros Casademunt
+imagenes/firmas/mili.png

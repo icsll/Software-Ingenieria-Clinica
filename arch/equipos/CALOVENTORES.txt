@@ -1,0 +1,12 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+CALOV-001| Covidien Warmtouch #SP17080457          | Hills | Quirofano | Warmtouch #SP17080457               | Hills-Quirofano-Gral      
+CALOV-002| Covidien Warmtouch #SP17070235          | Sanatorio | Quirofano | Warmtouch #SP17070235               | Sanatorio-Quirofano-Gral 
+CALOV-003| Covidien Warmtouch #SP17070231          | Sanatorio | Quirofano | Warmtouch #SP17070231               | Sanatorio-Quirofano-Gral
+CALOV-004| Covidien Warmtouch #SP17070228          | Angelus | Quirofano | Warmtouch #SP17070228               | Angelus-Quirofano-Gral 
+CALOV-005| Covidien Warmtouch #SP17080456          | Sanatorio | Quirofano | Warmtouch #SP17080456               | Sanatorio-Quirofano-Gral 
+CALOV-006| Covidien Warmtouch #SP17080455          | Angelus | Quirofano | Warmtouch #SP17080455               | Angelus-Quirofano-Gral 
+CALOV-007| Innovo 101724 #25013660001033          | Sanatorio | Hemodinamia | 101724 #25013660001033               | Sanatorio-Hemodinamia-Sala1 
+CALOV-008| Innovo 101724 #25013660001072          | Nordelta | Quirofano | 101724 #25013660001072               | Nordelta-Quirofano-Gral 
+CALOV-009| Innovo 101724 #25013660001080          | Nordelta | Quirofano | 101724 #25013660001080               | Nordelta-Quirofano-Gral 

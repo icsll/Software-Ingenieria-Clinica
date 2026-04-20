@@ -1,0 +1,62 @@
+﻿,,,,,,,Date :04/07/2025
+
+Test Setup
+,,,,,DUT Information
+
+Operator ID :,,BIO,,,Equipment Number :,,ELECTRO-017
+Calibration Tech :,,50955,,,Serial Number :,,31002-M15504330001
+Calibration Date :,,06/08/2021,,,Manufacturer :,,EDAN
+Firmware Version :,,3.01.03,,,Model :,,SE-601
+Serial Number :,,5453505,,,Location :,,CARDIOLOGIA-C16
+Date & Time :,,2025/07/04 & 13:19,,,Other :,,
+JOB Name :,,
+
+
+Template Information
+
+Template Name :,,ECG-I,,,Standard :,,IEC62353-Direct
+Pause after Power ON:,,NO,,,Pause before Power OFF:,,NO
+Power ON delay:,,2,,,Power OFF delay:,,0
+Test Speed:,,NORMAL,,,Test Mode:,,AUTO
+Halt on Test Failure:,,YES,,,Multi PE Test:,,NO
+Include Time:,,YES,,,Multi Resstore:,,WORST/LAST
+Insulation Resistance Voltage:,,500V,,,Reverse Polarity:,,YES
+Multi Enclosure Test :,,NO,,,Classification:,,I
+
+
+
+PLC Configuration-Applied part setup
+
+AP Name,AP Type,AP Num
+
+ECG,CF,10
+
+ESA615 Test Results
+
+Test Name,,,,,Value,High Limits,Low Limits,Status
+
+Protective Earth Resistance,,,,, 0.148 Ohm,0.3,-,P
+Insulation Resistance,,,,,,,,P
+,Mains to Protective Earth,,,, 999 MOhm,-,-,P
+,Mains to Applied Parts,,,, 999 MOhm,-,-,P
+,Applied Parts to Non-Earth Accessible Conductive Part,,,, 99.1 MOhm,-,-,P
+Mains Voltage,,,,,,,,P
+,Live to Neutral,,,, 224.1 V,-,-,P
+,Neutral to Earth,,,, 224.7 V,-,-,P
+,Live to Earth,,,, 1.9 V,-,-,P
+Equipment Current,,,,, 0.2 A,-,-,P
+Direct Applied Part Leakage,,,,,,,,P
+,Normal Condition,,,,,,,P
+,,ECG,,, 6.2 uAAC,50,-,P
+,Normal Condition- Reversed Mains,,,,,,,P
+,,ECG,,, 6.2 uAAC,50,-,P
+Direct Equipment Leakage,,,,,,,,P
+,Open Earth,,,, 105.7 uA,500,-,P
+,Open Earth- Reversed Mains,,,, 106.4 uA,500,-,P
+
+
+
+
+
+ ,,,,,,, _________ 
+ ,,,,,,,Signature

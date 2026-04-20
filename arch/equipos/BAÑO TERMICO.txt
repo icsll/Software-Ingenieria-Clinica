@@ -1,0 +1,4 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+BAÑ-TER-004| VICKING 1002 #28704          | Sanatorio | Preanalitica | 1002 #28704               | Sanatorio-Preanalitica-Labo      

@@ -1,0 +1,17 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo
+Montaje y apoyo | Revisar integridad y disposición de la superficie de apoyo, evaluando si es seguro
+Cable de alimentación y enchufe | No debe apreciarse suciedad ni desgaste excesivos
+Etiquetado | Inspeccionar el estado de las etiquetas
+Indicadores | Realizar inspección visual y funcional de display, serigrafía, indicadores y teclado de membrana, según corresponda
+Accesorios | Verificar presencia y estado de los accesorios. No debería existit dificultas en lacolocación de estos.
+Limpieza | Realizar limpieza exterior e interior del equipo
+
+[EQUIPAMIENTO USADO PARA MEDIR]
+ENCABEZADOS: Equipamiento | Detalle | Fecha de calibración
+Termometro | TFA  Kat. Nr. 30.5013 #0213 | 11/09/2025
+
+[PRUEBAS CUANTITATIVAS]
+ENCABEZADOS: Ítem | Evaluación | Resultado | V1 | M1 | V2 | M2 |  V3 | M3
+Temperatura [°C] | Verificar que se mantenga dentro del rango especificado por el fabricante duente el funcionamiento, que la temperatura medida (M) no difiera más de un 10% respecto a la programada (V).
