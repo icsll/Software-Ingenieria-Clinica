@@ -1,0 +1,27 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo
+Pantalla |Revisar funcionamiento de pantalla y panel de control
+Fecha y Hora | Verificar que la fecha y hora del equipo estén configuradas correctamente
+Accesorios | Revisar estado de cables y reemplazar de ser necesario
+ECG | Probar las distintas derivacione y distintas formas de onda
+Alarmas | Verificar que las alarmas correspondientes al equipo se activen de forma correcta y que los indicadores visuales y auditivos sean reconocibles
+Limpieza | Realizar limpieza exterior e interior del equipo
+Cable de alimentación| Inspeccionar el estado de cable, fuente y enchufe
+Batería | Cambio de batería si corresponde
+Conectividad | Verificar conexión a central de monitoreo
+Anclaje | Verificar estado del soporte
+Ruedas | Verificar buen desplazamiento y estado
+Etiquetado | Inspeccionar el estado de las etiquetas
+
+
+[PRUEBAS CUANTITATIVAS]
+ENCABEZADOS: Ítem | Evaluación | Resultado | V1 | M1 | V2 | M2 |  V3 | M3 | Tol.
+SpO2 [%] | Evaluar medición en 3 puntos | |90| |97| |100| | ± 1
+PNI [mmHg] | Evaluar medición en 3 puntos | |120/80| |140/100| |100/60| | ± 10 
+Temperatura [T°] | Evaluar medición en 3 puntos | |25| |37| |40| | ± 0.1 
+Frecuencia [lpm] | Evaluar medición en 3 puntos| | | | | | | | ± 1
+
+[EQUIPAMIENTO UTILIZADO]
+ENCABEZADOS: Equipamiento | Detalle | Fecha de calibración
+ProSim 8 | Analizador de signos vitales marca FLUKE | 

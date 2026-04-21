@@ -151,7 +151,7 @@ def agregarPREV(pdf):
                 elif col.lower().startswith("Ítem"):
                     anchos.append(25)   # ítem medio
                 elif "evaluación" in col.lower():
-                    anchos.append(65)   # evaluación grande
+                    anchos.append(60)   # evaluación grande 65
                 elif "resultado" in col.lower():
                     anchos.append(20)   # resultado corto
                 elif "Observación" in col.lower():

@@ -1,6 +1,6 @@
 
 # Variables globales
-IDinforme = "ID informe" # ID del informe --> modificar segun planilla
+IDinforme = "PREV-MON-MUL-057" # ID del informe --> modificar segun planilla
 
 marcaEEM = "" # marca del equipo
 modeloEEM = "" # modelo del equipo
@@ -19,6 +19,9 @@ archSE = ""
 archivo_calibracion = "arch/fluke_calib_date.txt" # archivo para almacenar fecha de calib
 fluke_calib_date = "" # fecha de calibracion del analizador de seguridad electrica
 opcion = "" # opcion seleccionada por el usuario para el tipo de ensayo
+
+archivo_calib_prosim = "arch/prosim_calib_date.txt" # archivo para almacenar fecha de calib
+prosim_calib_date = "" # fecha de calibracion del analizador de seguridad electrica
 
 # variables para la deteccion de partes aplicables
 parte_aplicable = False # si hay parte aplicable o no

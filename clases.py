@@ -100,7 +100,7 @@ class PDF(FPDF):
     tabla():
     Permite armar tablas con multi_cell y bordes
     """
-    def tabla(self, x, y, anchos_columnas, filas, text_size=10, align='L'):
+    def tabla(self, x, y, anchos_columnas, filas, text_size=9, align='L'):
         self.set_font("Helvetica", size=text_size)
         # Variables iniciales de escala
         line_height = 5  # altura constante para multi_cell

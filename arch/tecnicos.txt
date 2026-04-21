@@ -6,3 +6,5 @@ Enrique Godoy
 imagenes/firmas/enri.png
 Milagros Casademunt
 imagenes/firmas/mili.png
+Malena Hidalgo
+imagenes/firmas/male.png

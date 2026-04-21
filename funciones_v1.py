@@ -276,17 +276,6 @@ def cargar_planilla(arch_name):
 
     arch = "arch/planilla/" + arch_name + ".txt"
 
-    confirmacion = questionary.select(
-        "¿Utilizo el simulador de signos vitales?",
-        choices=[
-            questionary.Choice(title="Si", value="s"),
-            questionary.Choice(title="No", value="n")
-        ]
-    ).ask()
-    
-    if confirmacion == 's':
-        fecha_validada = verificar_fecha_calib_prosim(leer_fecha_calib_prosim, guardar_fecha_calib_prosim)
-
     try:
         with open(arch, 'r', encoding="utf-8") as f:
             seccion_actual = None
@@ -318,17 +307,7 @@ def cargar_planilla(arch_name):
 
                         item = {}
                         for i, encabezado in enumerate(encabezados):
-                            if confirmacion == 's':
-                                valor_leido = partes[i] if i < len(partes) else ""
-                                
-                                # Lógica de automatización para el Prosim 8
-                                # Si la columna es 'Fecha de calibración' y el equipo es 'Prosim 8'
-                                if encabezado == "Fecha de calibración" and "Prosim 8" in partes:
-                                    item[encabezado] = fecha_validada
-                                else:
-                                    item[encabezado] = valor_leido
-                            else:
-                                item[encabezado] = partes[i] if i < len(partes) else ""
+                            item[encabezado] = partes[i] if i < len(partes) else ""
                         secciones[seccion_actual]["items"].append(item)
 
         return secciones
@@ -336,53 +315,6 @@ def cargar_planilla(arch_name):
     except FileNotFoundError:
         print(f"Archivo '{arch}' no encontrado.")
         return None
-
-"""
-leer_fecha_calibracion():
-Lee la fecha de calibración desde un archivo de texto. Si el archivo no existe, devuelve None.
-arch definido en parametros: arch/prosim_calib_date.txt
-"""
-def leer_fecha_calib_prosim():
-    if os.path.exists(parametros.archivo_calib_prosim):
-        with open(parametros.archivo_calib_prosim, 'r') as file:
-            return file.read().strip()
-    return None
-
-"""
-guardar_fecha_calibracion(fecha):
-Guarda la fecha de calibración en un archivo de texto. Si el archivo no existe, lo crea
-"""
-def guardar_fecha_calib_prosim(fecha):
-    with open(parametros.archivo_calib_prosim, 'w') as file:
-        file.write(fecha)
-
-"""
-verificar_fecha_calib_prosim(leer_fecha_func, guardar_fecha_func):
-Verifica la fecha de calibración del equipo. Si la fecha guardada es correcta, la devuelve
-Si no es correcta o no existe, solicita una nueva fecha y la guarda
-"""
-def verificar_fecha_calib_prosim(leer_fecha_func, guardar_fecha_func):
-    # Leer la fecha guardada
-    prosim_calib_date = leer_fecha_func()
-
-    if prosim_calib_date:
-        print(f"La última calibración del equipo fue: {prosim_calib_date}")
-        confirmacion = questionary.select(
-            "¿Es correcta esta fecha?",
-            choices=[
-                questionary.Choice(title="Si", value="s"),
-                questionary.Choice(title="No", value="n")
-            ]
-        ).ask()
-    else:
-        confirmacion = 'n'
-
-    # Si no es correcta o no existe, pedir nueva fecha
-    if confirmacion != 's':
-        prosim_calib_date = input("Ingrese la última fecha de calibración (DD/MM/AAAA): ").strip()
-        guardar_fecha_func(prosim_calib_date)
-
-    return prosim_calib_date
 
 """
 comprimir_imagen()

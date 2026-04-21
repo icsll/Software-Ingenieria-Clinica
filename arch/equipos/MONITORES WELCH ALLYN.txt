@@ -1,0 +1,17 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------                                                                                                        
+MON-MUL-001 | Monitor Mult. Welch Allyn Connex Spot #100091742519 | Angelus | Internación | Connex Spot #100091742519 | Angelus-Intern-Gral           
+MON-MUL-007 | Monitor Mult. Welch Allyn Connex Spot #100091642519 | Angelus | Quirofano | Connex Spot #100091642519 | Angelus-Quirofano-Recu        
+MON-MUL-053 | Monitor Mult. Welch Allyn Connex Spot #100091832519 | Sanatorio | Internación | Connex Spot #100091832519 | Sanatorio-Intern-Gral(2)      
+MON-MUL-054 | Monitor Mult. Welch Allyn Connex Spot #100091802519 | Sanatorio | Internación | Connex Spot #100091802519 | Sanatorio-Intern-Gral(1)      
+MON-MUL-055 | Monitor Mult. Welch Allyn Connex Spot #100030305019 | Sanatorio | Internación | Connex Spot #100030305019 | Sanatorio-Intern-Gral(2)
+MON-MUL-056 | Monitor Mult. Welch Allyn Connex Spot #100091672519 | Sanatorio | Internación | Connex Spot #100091672519 | Sanatorio-Intern-Gral(2)      
+MON-MUL-057 | Monitor Mult. Welch Allyn Connex Spot #100091692519 | Sanatorio | Internación | Connex Spot #100091692519 | Sanatorio-Intern-Gral(2)      
+MON-MUL-058 | Monitor Mult. Welch Allyn Connex Spot #100091862519 | Sanatorio | Internación | Connex Spot #100091862519 | Sanatorio-Intern-Gral(1)      
+MON-MUL-059 | Monitor Mult. Welch Allyn Connex Spot #100091882519 | Sanatorio | Internación | Connex Spot #100091882519 | Sanatorio-Anexo-Gral          
+MON-MUL-064 | Monitor Mult. Welch Allyn Connex Spot #100030275019 | Sanatorio | Internación | Connex Spot #100030275019 | Sanatorio-Anexo-Gral          
+MON-MUL-065 | Monitor Mult. Welch Allyn Connex Spot #100091722519 | Sanatorio | Internación | Connex Spot #100091722519 | Sanatorio-Intern-Gral(2)      
+MON-MUL-102 | Monitor Mult. Welch Allyn Connex Spot #100030295019 | Angelus | Enfermeria | Connex Spot #100030295019 | Angelus-Quirofano-Recu        
+      
+          
