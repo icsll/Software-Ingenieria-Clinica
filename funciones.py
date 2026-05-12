@@ -273,7 +273,6 @@ Cada sección es una clave y cada item un subdiccionario.
 """
 def cargar_planilla(arch_name):
     secciones = {}
-
     arch = "arch/planilla/" + arch_name + ".txt"
 
     confirmacion = questionary.select(
@@ -284,52 +283,100 @@ def cargar_planilla(arch_name):
         ]
     ).ask()
     
+    fecha_validada = None  # Inicializar a None
     if confirmacion == 's':
         fecha_validada = verificar_fecha_calib_prosim(leer_fecha_calib_prosim, guardar_fecha_calib_prosim)
 
     try:
         with open(arch, 'r', encoding="utf-8") as f:
             seccion_actual = None
+            subseccion_actual = None
+            descripcion_subseccion = None
 
             for linea in f:
                 linea = linea.strip()
                 if not linea:
                     continue
 
-                # Separadores de seccion
+                # Separadores de SECCIÓN [...]
                 if linea.startswith("[") and linea.endswith("]"):
                     seccion_actual = linea[1:-1]
                     secciones[seccion_actual] = {
+                        "subsecciones": [],
                         "encabezados": [],
                         "items": []
                     }
+                    subseccion_actual = None
 
-                # Detecta encabezados
+                # Separadores de SUBSECCIÓN == ... ==
+                elif linea.startswith("==") and linea.endswith("=="):
+                    subseccion_actual = linea[2:-2].strip()
+                    descripcion_subseccion = None
+                    
+                    if seccion_actual:
+                        # Crear nueva subsección
+                        nueva_subseccion = {
+                            "nombre": subseccion_actual,
+                            "descripcion": "",
+                            "encabezados": [],
+                            "items": []
+                        }
+                        secciones[seccion_actual]["subsecciones"].append(nueva_subseccion)
+
+                # Detecta ENCABEZADOS
                 elif linea.startswith("ENCABEZADOS:"):
                     if seccion_actual:
                         encabezados = [p.strip() for p in linea.replace("ENCABEZADOS:", "").split("|")]
-                        secciones[seccion_actual]["encabezados"] = encabezados
+                        
+                        if subseccion_actual:
+                            # Encabezados de la subsección
+                            subsecciones = secciones[seccion_actual]["subsecciones"]
+                            if subsecciones:
+                                subsecciones[-1]["encabezados"] = encabezados
+                        else:
+                            # Encabezados de la sección (sin subsecciones)
+                            secciones[seccion_actual]["encabezados"] = encabezados
 
-                # items
+                # Items
                 else:
-                    if seccion_actual and secciones[seccion_actual]["encabezados"]:
-                        partes = [p.strip() for p in linea.split("|")]
-                        encabezados = secciones[seccion_actual]["encabezados"]
-
-                        item = {}
-                        for i, encabezado in enumerate(encabezados):
-                            if confirmacion == 's':
-                                valor_leido = partes[i] if i < len(partes) else ""
+                    if seccion_actual:
+                        # Si es una descripción de subsección (línea de texto sin |)
+                        if subseccion_actual and not linea.startswith("ENCABEZADOS:") and "|" not in linea:
+                            subsecciones = secciones[seccion_actual]["subsecciones"]
+                            if subsecciones and not subsecciones[-1]["encabezados"]:
+                                subsecciones[-1]["descripcion"] = linea
+                            continue
+                        
+                        # Si es un item de datos
+                        if subseccion_actual:
+                            # Item dentro de subsección
+                            subsecciones = secciones[seccion_actual]["subsecciones"]
+                            if subsecciones and subsecciones[-1]["encabezados"]:
+                                partes = [p.strip() for p in linea.split("|")]
+                                encabezados = subsecciones[-1]["encabezados"]
                                 
-                                # Lógica de automatización para el Prosim 8
-                                # Si la columna es 'Fecha de calibración' y el equipo es 'Prosim 8'
-                                if encabezado == "Fecha de calibración" and "Prosim 8" in partes:
+                                item = {}
+                                for i, encabezado in enumerate(encabezados):
+                                    valor_leido = partes[i] if i < len(partes) else ""
+                                    if confirmacion == 's' and encabezado == "Fecha de calibración":
+                                        item[encabezado] = fecha_validada
+                                    else:
+                                        item[encabezado] = valor_leido
+                                subsecciones[-1]["items"].append(item)
+                        
+                        elif secciones[seccion_actual]["encabezados"]:
+                            # Item en sección sin subsecciones
+                            partes = [p.strip() for p in linea.split("|")]
+                            encabezados = secciones[seccion_actual]["encabezados"]
+                            
+                            item = {}
+                            for i, encabezado in enumerate(encabezados):
+                                valor_leido = partes[i] if i < len(partes) else ""
+                                if confirmacion == 's' and encabezado == "Fecha de calibración":
                                     item[encabezado] = fecha_validada
                                 else:
                                     item[encabezado] = valor_leido
-                            else:
-                                item[encabezado] = partes[i] if i < len(partes) else ""
-                        secciones[seccion_actual]["items"].append(item)
+                            secciones[seccion_actual]["items"].append(item)
 
         return secciones
 

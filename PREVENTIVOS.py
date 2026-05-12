@@ -114,12 +114,11 @@ def planillaBase(pdf):
     pdf.set_font('Arial', '', 10) 
     
     return pdf.get_y()
-    
+
 def agregarPREV(pdf):
     
     y = planillaBase(pdf)
 
-    # armo la ruta completa con el nombre del archivo usando pathlib
     nombre_archivo = f"{parametros.tipoEquipo}.txt"
     ruta_base = Path('arch') / 'planilla'
     ruta_completa = ruta_base / nombre_archivo
@@ -130,49 +129,100 @@ def agregarPREV(pdf):
     respuestas = ventanaPM(parametros.tipoEquipo)
 
     for seccion, datos in respuestas.items():
-        encabezados = datos.get("encabezados", [])
-        items = datos.get("items", [])
-
-        if not encabezados and not items:
-            continue
-
-        # Sección
+        # Sección principal
         pdf.recuadro(10, pdf.get_y(), 190, 8, texto=seccion, align="C", bold=True, fondo=(220,220,220), border=1)
 
-        # Armado de columnas
-        if items:
-            ancho_total = 190
+        # Si hay subsecciones
+        if datos.get("subsecciones"):
+            for subseccion in datos["subsecciones"]:
+                y = pdf.get_y()
+                
+                # Subencabezado (nombre subsección)
+                pdf.recuadro(10, y, 190, 6, texto=subseccion["nombre"], align="C", bold=True, 
+                            fondo=(240,240,240), border=1, text_size=9)
+                
+                # Descripción (si existe)
+                if subseccion["descripcion"]:
+                    pdf.set_xy(10, pdf.get_y())
+                    pdf.set_font("Arial", "I", 8)
+                    pdf.multi_cell(190, 4, subseccion["descripcion"], border=0, align="L")
+                    pdf.set_font("Arial", "", 10)
+                
+                # Encabezados y items
+                encabezados = subseccion["encabezados"]
+                items = subseccion["items"]
+                
+                if encabezados and items:
+                    ancho_total = 190
+                    #anchos = _calcular_anchos(encabezados, ancho_total)
+                    anchos = []
+                    for col in encabezados:
+                        if col.lower().startswith("código") or col.lower().startswith("6."):
+                            anchos.append(12)   # código cortito
+                        elif col.lower().startswith("Ítem"):
+                            anchos.append(25)   # ítem medio
+                        elif "evaluación" in col.lower():
+                            anchos.append(60)   # evaluación grande 65
+                        #elif "resultado" in col.lower():
+                           # anchos.append(20)   # resultado corto
+                        elif "Observación" in col.lower():
+                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
+                        else:
+                            # reparto ancho si no lo reconozco
+                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
 
-            #Ajustes de anchos por nombre de columna
-            anchos = []
-            for col in encabezados:
-                if col.lower().startswith("código") or col.lower().startswith("6."):
-                    anchos.append(12)   # código cortito
-                elif col.lower().startswith("Ítem"):
-                    anchos.append(25)   # ítem medio
-                elif "evaluación" in col.lower():
-                    anchos.append(60)   # evaluación grande 65
-                elif "resultado" in col.lower():
-                    anchos.append(20)   # resultado corto
-                elif "Observación" in col.lower():
-                    anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
-                else:
-                    # reparto ancho si no lo reconozco
-                    anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
+                    
+                    # ENCABEZADOS
+                    pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
+                    
+                    # FILAS
+                    for item in items:
+                        fila = [str(item.get(col, "")) for col in encabezados]
+                        pdf.tabla(10, pdf.get_y(), anchos, [fila], align="C")
+                
+                if pdf.get_y() > 210:
+                    pdf.add_page()
 
-            # ENCABEZADOS
-            pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
+        # Si NO hay subsecciones (comportamiento normal)
+        else:
+            encabezados = datos.get("encabezados", [])
+            items = datos.get("items", [])
 
-            # FILAS
-            for item in items:
-                fila = [str(item.get(col, "")) for col in encabezados]
-                pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="L")
-                y = pdf.get_y()  # para no perder la posicion despues del multi_cell
+            if encabezados and items:
+                ancho_total = 190
+                #anchos = _calcular_anchos(encabezados, ancho_total)
+                anchos = []
+                for col in encabezados:
+                    if col.lower().startswith("código") or col.lower().startswith("6."):
+                        anchos.append(12)   # código cortito
+                    elif col.lower().startswith("Ítem"):
+                        anchos.append(25)   # ítem medio
+                    elif "evaluación" in col.lower():
+                        anchos.append(60)   # evaluación grande 65
+                    elif "resultado final" in col.lower():
+                        anchos.append(ancho_total)   # resultado largo
+                    elif "resultado" in col.lower():
+                        anchos.append(20)   # resultado corto
+                    elif "Observación" in col.lower():
+                        anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
+                    else:
+                        # reparto ancho si no lo reconozco
+                        anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
 
-        # Para no sobreescribir la conformidad
-        if y > 210: # Corregir numero
-            pdf.add_page()
-            y = 20
+                # ENCABEZADOS
+                pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
+                
+                # FILAS
+                for item in items:
+                    fila = [str(item.get(col, "")) for col in encabezados]
+                    pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
+                    y = pdf.get_y()
+            
+            if y > 210:
+                pdf.add_page()
+
+#def calcular ancho en notas
+   
 
 """
 ventanaPM: crea la ventana de mantenimiento preventivo
@@ -186,7 +236,7 @@ def ventanaPM(arch_name):
     # Ventana principal
     root = tk.Tk()
     root.title("Mantenimiento Preventivo")
-    root.geometry("1200x600") # tamaño inicial
+    root.geometry("1200x700")
 
     # Forzar ventana al frente al inicio
     root.lift()
@@ -218,59 +268,149 @@ def ventanaPM(arch_name):
         container.rowconfigure(0, weight=1)
         container.columnconfigure(0, weight=1)
 
-        encabezados = datos.get("encabezados", [])
-        items = datos.get("items", [])
-
-        # Encabezados de tabla
-        for j, encabezado in enumerate(encabezados):
-            ttk.Label(
-                scroll_frame,
-                text=encabezado,
-                font=("Helvetica", 10, "bold")
-            ).grid(row=0, column=j, padx=10, pady=5, sticky="w")
-
         entry_widgets[seccion] = []
+        row_counter = 0
 
-        # Filas dinamicas
-        for i, item in enumerate(items, start=1):
-            fila_widgets = {}
+        # Verificar si hay subsecciones
+        subsecciones = datos.get("subsecciones", [])
+        
+        if subsecciones:
+            # Manejo de SUBSECCIONES
+            for subseccion in subsecciones:
+                # Título de la subsección
+                titulo = ttk.Label(
+                    scroll_frame,
+                    text=subseccion["nombre"],
+                    font=("Helvetica", 11, "bold"),
+                    foreground="#0066cc"
+                )
+                titulo.grid(row=row_counter, column=0, columnspan=10, pady=(10, 5), padx=10, sticky="w")
+                row_counter += 1
+
+                # Descripción (si existe)
+                if subseccion.get("descripcion"):
+                    desc = ttk.Label(
+                        scroll_frame,
+                        text=subseccion["descripcion"],
+                        font=("Helvetica", 9, "italic"),
+                        foreground="#666666"
+                    )
+                    desc.grid(row=row_counter, column=0, columnspan=10, padx=20, pady=(0, 5), sticky="w")
+                    row_counter += 1
+
+                encabezados = subseccion.get("encabezados", [])
+                items = subseccion.get("items", [])
+
+                if encabezados:
+                    # Encabezados de tabla
+                    for j, encabezado in enumerate(encabezados):
+                        ttk.Label(
+                            scroll_frame,
+                            text=encabezado,
+                            font=("Helvetica", 10, "bold"),
+                            background="#e8e8e8"
+                        ).grid(row=row_counter, column=j, padx=10, pady=5, sticky="w")
+                    row_counter += 1
+
+                    # Filas de datos
+                    for item in items:
+                        fila_widgets = {}
+                        for j, encabezado in enumerate(encabezados):
+                            valor = item.get(encabezado, "")
+
+                            if encabezado in ["Num. Prueba", "Valor esperado", "Tolerancia", "Descripción"]:
+                                # Solo lectura
+                                lbl = ttk.Label(
+                                    scroll_frame,
+                                    text=str(valor),
+                                    wraplength=200,
+                                    anchor="w",
+                                    justify="left",
+                                    background="#f9f9f9"
+                                )
+                                lbl.grid(row=row_counter, column=j, padx=10, pady=5, sticky="w")
+                                fila_widgets[encabezado] = None
+
+                            elif encabezado in ["Resultado", "Resultado final"]:
+                                # Combobox para Resultado
+                                combo = ttk.Combobox(
+                                    scroll_frame,
+                                    values=["Pasó", "Falló", "No aplica"],
+                                    state="readonly",
+                                    justify="left",
+                                    #width=12
+                                )
+                                if valor:
+                                    combo.set(valor)
+                                combo.grid(row=row_counter, column=j, padx=10, pady=5)
+                                fila_widgets[encabezado] = combo
+
+                            else:
+                                # Editable (Medición, Observación, etc)
+                                entry = ttk.Entry(scroll_frame, width=15)
+                                entry.insert(0, str(valor))
+                                entry.grid(row=row_counter, column=j, padx=10, pady=5)
+                                fila_widgets[encabezado] = entry
+                                
+
+                        entry_widgets[seccion].append((item, fila_widgets))
+                        row_counter += 1
+
+        else:
+            # Manejo de SECCIONES SIN SUBSECCIONES (formato antiguo)
+            encabezados = datos.get("encabezados", [])
+            items = datos.get("items", [])
+
+            # Encabezados de tabla
             for j, encabezado in enumerate(encabezados):
-                valor = item.get(encabezado, "")
+                ttk.Label(
+                    scroll_frame,
+                    text=encabezado,
+                    font=("Helvetica", 10, "bold")
+                ).grid(row=row_counter, column=j, padx=10, pady=5, sticky="w")
+            row_counter += 1
 
-                if encabezado in ["Ítem", "Evaluación"]:
-                    # ---- Solo lectura ----
-                    lbl = ttk.Label(
-                        scroll_frame,
-                        text=valor,
-                        wraplength=250,
-                        anchor="w",
-                        justify="left",
-                        background="#f0f0f0"
-                    )
-                    lbl.grid(row=i, column=j, padx=10, pady=5, sticky="w")
-                    fila_widgets[encabezado] = None
+            # Filas dinamicas
+            for item in items:
+                fila_widgets = {}
+                for j, encabezado in enumerate(encabezados):
+                    valor = item.get(encabezado, "")
 
-                elif encabezado == "Resultado":
-                    # ---- Opciones con Combobox ----
-                    combo = ttk.Combobox(
-                        scroll_frame,
-                        values=["Pasó", "Falló", "No aplica"],
-                        state="readonly",
-                        width=15
-                    )
-                    if valor:
-                        combo.set(valor)
-                    combo.grid(row=i, column=j, padx=10, pady=5)
-                    fila_widgets[encabezado] = combo
+                    if encabezado in ["Ítem", "Evaluación"]:
+                        # Solo lectura
+                        lbl = ttk.Label(
+                            scroll_frame,
+                            text=valor,
+                            wraplength=250,
+                            anchor="w",
+                            justify="left",
+                            background="#f0f0f0"
+                        )
+                        lbl.grid(row=row_counter, column=j, padx=10, pady=5, sticky="w")
+                        fila_widgets[encabezado] = None
 
-                else:
-                    # ---- Editable ----
-                    entry = ttk.Entry(scroll_frame, width=30)
-                    entry.insert(0, valor)
-                    entry.grid(row=i, column=j, padx=10, pady=5)
-                    fila_widgets[encabezado] = entry
+                    elif encabezado in ["Resultado", "Resultado final"]:
+                        # Combobox
+                        combo = ttk.Combobox(
+                            scroll_frame,
+                            values=["Pasó", "Falló", "No aplica"],
+                            state="readonly",
+                            width=15
+                        )
+                        if valor:
+                            combo.set(valor)
+                        combo.grid(row=row_counter, column=j, padx=10, pady=5)
+                        fila_widgets[encabezado] = combo
 
-            entry_widgets[seccion].append((item, fila_widgets))
+                    else:
+                        # Editable (Observación, Fecha, etc)
+                        entry = ttk.Entry(scroll_frame, width=30)
+                        entry.insert(0, valor)
+                        entry.grid(row=row_counter, column=j, padx=10, pady=5)
+                        fila_widgets[encabezado] = entry
+
+                entry_widgets[seccion].append((item, fila_widgets))
+                row_counter += 1
 
     def guardar_y_cerrar():
         for seccion, filas in entry_widgets.items():

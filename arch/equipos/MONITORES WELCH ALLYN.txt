@@ -15,3 +15,7 @@ MON-MUL-065 | Monitor Mult. Welch Allyn Connex Spot #100091722519 | Sanatorio | 
 MON-MUL-102 | Monitor Mult. Welch Allyn Connex Spot #100030295019 | Angelus | Enfermeria | Connex Spot #100030295019 | Angelus-Quirofano-Recu        
       
           
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+MON-001   | Philips XYZ #SN12345         | Sanatorio | UCI          | XYZ #SN12345              | Sanatorio-UCI-Cama 5             

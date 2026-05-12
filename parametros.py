@@ -1,6 +1,6 @@
 
 # Variables globales
-IDinforme = "PREV-MON-MUL-057" # ID del informe --> modificar segun planilla
+IDinforme = "ID Informe" # ID del informe --> modificar segun planilla
 
 marcaEEM = "" # marca del equipo
 modeloEEM = "" # modelo del equipo
