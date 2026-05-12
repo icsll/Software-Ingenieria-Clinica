@@ -1,18 +1,18 @@
 Nuevo equipo
 Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
 ----------|------------------------------|-----------|--------------|---------------------------|----------------------------------                                                                                                        
-MON-MUL-001 | Monitor Mult. Welch Allyn Connex Spot #100091742519 | Angelus | Internación | Connex Spot #100091742519 | Angelus-Intern-Gral           
-MON-MUL-007 | Monitor Mult. Welch Allyn Connex Spot #100091642519 | Angelus | Quirofano | Connex Spot #100091642519 | Angelus-Quirofano-Recu        
-MON-MUL-053 | Monitor Mult. Welch Allyn Connex Spot #100091832519 | Sanatorio | Internación | Connex Spot #100091832519 | Sanatorio-Intern-Gral(2)      
-MON-MUL-054 | Monitor Mult. Welch Allyn Connex Spot #100091802519 | Sanatorio | Internación | Connex Spot #100091802519 | Sanatorio-Intern-Gral(1)      
-MON-MUL-055 | Monitor Mult. Welch Allyn Connex Spot #100030305019 | Sanatorio | Internación | Connex Spot #100030305019 | Sanatorio-Intern-Gral(2)
-MON-MUL-056 | Monitor Mult. Welch Allyn Connex Spot #100091672519 | Sanatorio | Internación | Connex Spot #100091672519 | Sanatorio-Intern-Gral(2)      
-MON-MUL-057 | Monitor Mult. Welch Allyn Connex Spot #100091692519 | Sanatorio | Internación | Connex Spot #100091692519 | Sanatorio-Intern-Gral(2)      
-MON-MUL-058 | Monitor Mult. Welch Allyn Connex Spot #100091862519 | Sanatorio | Internación | Connex Spot #100091862519 | Sanatorio-Intern-Gral(1)      
-MON-MUL-059 | Monitor Mult. Welch Allyn Connex Spot #100091882519 | Sanatorio | Internación | Connex Spot #100091882519 | Sanatorio-Anexo-Gral          
-MON-MUL-064 | Monitor Mult. Welch Allyn Connex Spot #100030275019 | Sanatorio | Internación | Connex Spot #100030275019 | Sanatorio-Anexo-Gral          
-MON-MUL-065 | Monitor Mult. Welch Allyn Connex Spot #100091722519 | Sanatorio | Internación | Connex Spot #100091722519 | Sanatorio-Intern-Gral(2)      
-MON-MUL-102 | Monitor Mult. Welch Allyn Connex Spot #100030295019 | Angelus | Enfermeria | Connex Spot #100030295019 | Angelus-Quirofano-Recu        
+MON-BIO-91742519 | Monitor Mult. Welch Allyn Connex Spot #100091742519 | Angelus | Internación | Connex Spot #100091742519 | IG-LL-ANG-PB-INT-LL-HAB00           
+MON-BIO-91642519 | Monitor Mult. Welch Allyn Connex Spot #100091642519 | Angelus | Internación | Connex Spot #100091642519 | IG-LL-ANG-PB-INT-LL-HAB00        
+MON-BIO-91835519 | Monitor Mult. Welch Allyn Connex Spot #100091832519 | Sanatorio | Internación | Connex Spot #100091832519 | IG-LL-SLL-02-INT-LL-HAB00      
+MON-BIO-91802519 | Monitor Mult. Welch Allyn Connex Spot #100091802519 | Sanatorio | Unidad Coronaria | Connex Spot #100091802519 | IG-LL-SLL-01-UCO-LL-HAB00      
+MON-BIO-30305019 | Monitor Mult. Welch Allyn Connex Spot #100030305019 | Sanatorio | Internación | Connex Spot #100030305019 | IG-LL-SLL-02-INT-LL-HAB00
+MON-BIO-91672519 | Monitor Mult. Welch Allyn Connex Spot #100091672519 | Angelus | Hospital de dia | Connex Spot #100091672519 | IG-LL-ANG-PB-INT-LL-HDSAA      
+MON-BIO-91692519 | Monitor Mult. Welch Allyn Connex Spot #100091692519 | Sanatorio | Internación | Connex Spot #100091692519 | IG-LL-SLL-02-INT-LL-HAB00      
+MON-BIO-91862519 | Monitor Mult. Welch Allyn Connex Spot #100091862519 | Sanatorio | Quirofano | Connex Spot #100091862519 | IG-LL-SLL-01-CIR-LL-QUI00      
+MON-BIO-91882519 | Monitor Mult. Welch Allyn Connex Spot #100091882519 | Sanatorio | Internación | Connex Spot #100091882519 | IG-LL-SLL-PB-INT-LL-HAB00          
+MON-BIO-30275019 | Monitor Mult. Welch Allyn Connex Spot #100030275019 | Sanatorio | Internación | Connex Spot #100030275019 | IG-LL-SLL-PB-INT-LL-HAB00         
+MON-BIO-91722519 | Monitor Mult. Welch Allyn Connex Spot #100091722519 | Sanatorio | Internación | Connex Spot #100091722519 | IG-LL-SLL-02-INT-LL-HAB00      
+MON-BIO-30295019 | Monitor Mult. Welch Allyn Connex Spot #100030295019 | Angelus | Quirofano | Connex Spot #100030295019 | IG-LL-ANG-PB-CIR-LL-QUI00        
       
           
 Nuevo equipo
