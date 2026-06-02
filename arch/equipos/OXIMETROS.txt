@@ -1,0 +1,6 @@
+Nuevo equipo
+Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Serie              | Ubicacion
+----------|------------------------------|-----------|--------------|---------------------------|----------------------------------
+OXIMETR-B1603470| Oximetro Covidien Bedside #MBB1603470 | Angelus | Quirófano | Bedside #MBB1603470 | IG-LL-ANG-PB-CIR-LL-QUI00
+OXIMETR-B1603472| Oximetro Covidien Bedside #MBB2114492| Sanatorio | Quirófano | Bedside #MBB2114492 | IG-LL-SLL-01-CIR-LL-QUI00
+OXIMETR-B1507475| Oximetro Covidien Bedside #LGM11Z5056| Hills | Quirófano | Bedside #LGM11Z5056 | IG-LL-HIL-02-CIR-LL-QUI00

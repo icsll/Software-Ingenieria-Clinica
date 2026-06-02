@@ -1,0 +1,23 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo | | 
+Pantalla | Revisar funcionamiento de pantalla y panel de control | | 
+Fecha y Hora | Verificar que la fecha y hora del equipo estén configuradas correctamente | | 
+Accesorios | Revisar estado de cables y reemplazar de ser necesario | | 
+Alarmas | Verificar que las alarmas correspondientes al equipo se activen de forma correcta y que los indicadores visuales y auditivos sean reconocibles | | 
+Limpieza | Realizar limpieza exterior e interior del equipo | | 
+Cable de alimentación | Inspeccionar el estado de cable, fuente y enchufe | | 
+Batería | Cambio de batería si corresponde | | 
+Conectividad | Verificar conexión a central de monitoreo | | 
+Anclaje | Verificar estado del soporte | | 
+Ruedas | Verificar buen desplazamiento y estado | | 
+Etiquetado | Inspeccionar el estado de las etiquetas | |
+
+
+[PRUEBAS CUANTITATIVAS]
+== SpO2 [%] ==
+Evaluar medición en 3 puntos
+ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
+ 1 | 90 | X | ± 1 | 
+ 2 | 97 | X | ± 1 | 
+ 3 | 100 | X | ± 1 |
