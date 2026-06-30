@@ -15,9 +15,24 @@ Etiquetado | Inspeccionar el estado de las etiquetas | |
 
 
 [PRUEBAS CUANTITATIVAS]
-== SpO2 [%] ==
-Evaluar medición en 3 puntos
+== SpO2 [%] ADULTO ==
+Evaluar medición en 3 puntos con saturómetro para adulto
 ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
- 1 | 90 | X | ± 1 | 
- 2 | 97 | X | ± 1 | 
- 3 | 100 | X | ± 1 |
+ 1 | 90 | X | ± 2 | 
+ 2 | 97 | X | ± 2 | 
+ 3 | 100 | X | ± 2 |
+
+ == SpO2 [%] PEDIATRICO ==
+Evaluar medición en 3 puntos con saturómetro neonatal
+ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
+ 1 | 90 | X | ± 2 | 
+ 2 | 97 | X | ± 2 | 
+ 3 | 100 | X | ± 2 |
+
+  == Frecuencia [lpm] ==
+Evaluar medición en 4 puntos
+ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
+ 1 | 60 | X | ± 3 | 
+ 2 | 80 | X | ± 3 | 
+ 3 | 110 | X | ± 3 | 
+ 4 | 140 | X | ± 3 |
