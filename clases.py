@@ -21,6 +21,29 @@ class PDF(FPDF):
         self.nombre_usuario = parametros.nombreTecnico
         self.ruta_firma = parametros.rutaFirmaTec
 
+    def _texto_seguro(self, texto):
+        if texto is None:
+            return ""
+
+        texto = str(texto)
+        reemplazos = {
+            "✔": "✔",
+            "✓": "✔",
+            "☐": "[ ]",
+            "✗": "[ ]",
+            "•": "-",
+            "–": "-",
+            "—": "-",
+        }
+        for origen, destino in reemplazos.items():
+            texto = texto.replace(origen, destino)
+
+        try:
+            texto.encode("latin-1")
+            return texto
+        except UnicodeEncodeError:
+            return texto.encode("latin-1", "replace").decode("latin-1")
+
     """
     recuadro():
     Permite armar recuadros, los de texto o tipo subtitulo que ocupa todo el ancho y con color
@@ -43,7 +66,7 @@ class PDF(FPDF):
         elif not fondo and border:
             self.rect(x, y, w, h, style='D')  # Solo borde
 
-        self.cell(w, h, texto, align=align, border=0)
+        self.cell(w, h, self._texto_seguro(texto), align=align, border=0)
         self.set_xy(x, y + h)
         
 
@@ -120,7 +143,7 @@ class PDF(FPDF):
                 y_antes_simulacion = self.get_y() # posición 'y' antes de escribir el texto
                 self.set_xy(x_pos_temp + 1, y_antes_simulacion + 1) # +1 mm margen superior e izquierdo
                 # Simulo la escritura del texto para calcular el alto real que ocupa
-                self.multi_cell(ancho_celda, line_height, texto_str, border=0, align=align)
+                self.multi_cell(ancho_celda, line_height, self._texto_seguro(texto_str), border=0, align=align)
                 
                 y_despues_simulacion = self.get_y() # posición 'y' después de escribir el texto                
                 altura_texto = y_despues_simulacion - y_antes_simulacion # calculo el alto real usado
@@ -164,7 +187,7 @@ class PDF(FPDF):
                 # Posición de inicio para el texto: y + 1 (1 mm de margen superior)
                 self.set_xy(x_pos + 1, y + 1) 
                 # El alto de la multi_cell es line_height, NO alto_fila
-                self.multi_cell(anchos_columnas[col] - 2, line_height, str(texto), border=0, align=align)
+                self.multi_cell(anchos_columnas[col] - 2, line_height, self._texto_seguro(texto), border=0, align=align)
                 x_pos += anchos_columnas[col]
 
             # Avanzo a la siguiente fila

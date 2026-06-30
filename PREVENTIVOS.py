@@ -221,6 +221,40 @@ def agregarPREV(pdf):
             if y > 210:
                 pdf.add_page()
 
+        checklist_items = datos.get("checklist", [])
+        if checklist_items:
+            # Encabezado del checklist
+            pdf.recuadro(10, pdf.get_y(), 190, 8, texto="CHECKLIST", align="C", bold=True, 
+                         fondo=(220,220,220), border=1, text_size=9)
+            
+            # Dar un pequeño salto de línea antes de empezar la lista
+            pdf.set_y(pdf.get_y() + 4) 
+            
+            for item in checklist_items:
+                # 1. Definir coordenadas actuales para el ítem
+                x_box = 15
+                y_actual = pdf.get_y()
+                tamaño_box = 4
+                
+                # 2. Dibujar el cuadradito vacío (alineado verticalmente con el texto)
+                pdf.rect(x_box, y_actual + 1, tamaño_box, tamaño_box)
+                
+                # 3. Si la tarea se realizó, dibujar una "X" dentro del cuadradito
+                if item.get("realizado"):
+                    pdf.line(x_box, y_actual + 1, x_box + tamaño_box, y_actual + 1 + tamaño_box) # Diagonal \
+                    pdf.line(x_box, y_actual + 1 + tamaño_box, x_box + tamaño_box, y_actual + 1) # Diagonal /
+                
+                # 4. Escribir la acción a la derecha del checkbox
+                pdf.set_xy(x_box + 8, y_actual)
+                pdf.set_font("Helvetica", size=10) # Asegurate de que coincida con la tipografía de tu reporte
+                
+                # Usamos multi_cell en vez de cell por si el texto es largo y necesita salto de línea
+                pdf.multi_cell(160, 6, item.get("accion", "")) 
+                
+                # 5. Salto de página preventivo (ajustá el 270 según el margen inferior que manejes)
+                if pdf.get_y() > 270:
+                    pdf.add_page()
+
 #def calcular ancho en notas
    
 
@@ -245,6 +279,7 @@ def ventanaPM(arch_name):
     notebook = ttk.Notebook(root)
     notebook.pack(fill="both", expand=True)
     entry_widgets = {}
+    checklist_vars = {}
 
     for seccion, datos in secciones.items():
         # Frame principal con scroll
@@ -269,7 +304,24 @@ def ventanaPM(arch_name):
         container.columnconfigure(0, weight=1)
 
         entry_widgets[seccion] = []
+        checklist_vars[seccion] = []
         row_counter = 0
+
+        checklist_items = datos.get("checklist", [])
+        if checklist_items:
+            checklist_frame = ttk.LabelFrame(scroll_frame, text="Checklist de acciones", padding=10)
+            checklist_frame.grid(row=row_counter, column=0, columnspan=10, padx=10, pady=(10, 5), sticky="ew")
+            row_counter += 1
+
+            for checklist_item in checklist_items:
+                var = tk.BooleanVar(value=bool(checklist_item.get("realizado", False)))
+                cb = ttk.Checkbutton(
+                    checklist_frame,
+                    text=checklist_item.get("accion", ""),
+                    variable=var
+                )
+                cb.grid(row=len(checklist_vars[seccion]), column=0, sticky="w", pady=2)
+                checklist_vars[seccion].append((checklist_item, var))
 
         # Verificar si hay subsecciones
         subsecciones = datos.get("subsecciones", [])
@@ -345,6 +397,11 @@ def ventanaPM(arch_name):
                                 combo.grid(row=row_counter, column=j, padx=10, pady=5)
                                 fila_widgets[encabezado] = combo
 
+                            elif encabezado in ["Observaciones"]:
+                                entry = ttk.Entry(scroll_frame, width=15)
+                                entry.insert(0, str(valor))
+                                entry.grid(row=row_counter, column=j, padx=10, pady=5)
+                                
                             else:
                                 # Editable (Medición, Observación, etc)
                                 entry = ttk.Entry(scroll_frame, width=15)
@@ -420,6 +477,11 @@ def ventanaPM(arch_name):
                         item[encabezado] = widget.get()
                     elif isinstance(widget, ttk.Entry):
                         item[encabezado] = widget.get()
+
+        for seccion, checklist_items_vars in checklist_vars.items():
+            for item, var in checklist_items_vars:
+                item["realizado"] = bool(var.get())
+
         root.destroy()
 
     # Botón global para guardar

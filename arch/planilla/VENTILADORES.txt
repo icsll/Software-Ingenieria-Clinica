@@ -3,7 +3,7 @@ ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
 Chasis | No debe haber daños en la carcasa del equipo | | 
 Pantalla | Revisar funcionamiento de pantalla y panel de control | | 
 Fecha y Hora | Verificar que la fecha y hora del equipo estén configuradas correctamente | | 
-Accesorios | Revisar estado de cables y reemplazar de ser necesario | | 
+Accesorios | Revisar estado de cables y casete espiratorio, reemplazar de ser necesario | | 
 Alarmas | Verificar que las alarmas correspondientes al equipo se activen de forma correcta y que los indicadores visuales y auditivos sean reconocibles | | 
 Limpieza | Realizar limpieza exterior e interior del equipo | | 
 Cable de alimentación | Inspeccionar el estado de cable, fuente y enchufe | | 
@@ -13,26 +13,12 @@ Anclaje | Verificar estado del soporte | |
 Ruedas | Verificar buen desplazamiento y estado | | 
 Etiquetado | Inspeccionar el estado de las etiquetas | |
 
+[CHECKLIST]
+CHECKLIST: Cambio de filtros|Cambio de celda de oxígeno|Cambio de boquillas de gases|Cambio de batería | Realizar prueba
 
-[PRUEBAS CUANTITATIVAS]
-== SpO2 [%] ADULTO ==
-Evaluar medición en 3 puntos con saturómetro para adulto
-ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
- 1 | 90 | X | ± 2 | 
- 2 | 97 | X | ± 2 | 
- 3 | 100 | X | ± 2 |
 
- == SpO2 [%] PEDIATRICO ==
-Evaluar medición en 3 puntos con saturómetro neonatal
-ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
- 1 | 90 | X | ± 2 | 
- 2 | 97 | X | ± 2 | 
- 3 | 100 | X | ± 2 |
-
-  == Frecuencia [lpm] ==
-Evaluar medición en 4 puntos
-ENCABEZADOS: Num. Prueba | Valor esperado | Valor medido | Tolerancia | Resultado
- 1 | 60 | X | ± 3 | 
- 2 | 80 | X | ± 3 | 
- 3 | 110 | X | ± 3 | 
- 4 | 140 | X | ± 3 |
+[EVALUACIÓN GENERAL DEL PREVENTIVO]
+ENCABEZADOS: Resultado final 
+ | 
+ Observaciones
+ 

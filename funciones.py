@@ -271,6 +271,34 @@ cargar_planilla(arch_name) --> MANTENIMIENTO PREVENTIVO
 Carga la planilla completa, leida del txt x equipo, en un diccionario.
 Cada sección es una clave y cada item un subdiccionario.
 """
+def parsear_checklist(texto, realizado=False):
+    """Convierte una cadena tipo 'Accion 1|Accion 2' en una lista de items de checklist."""
+    if not texto:
+        return []
+
+    texto = texto.strip()
+    if not texto:
+        return []
+
+    if texto.startswith("CHECKLIST:"):
+        texto = texto[len("CHECKLIST:"):].strip()
+
+    if "\n" in texto:
+        partes = [p.strip() for p in texto.splitlines()]
+    else:
+        partes = [p.strip() for p in texto.split("|")]
+
+    acciones = []
+    for parte in partes:
+        if not parte:
+            continue
+        accion = re.sub(r"^[-•*]\s*", "", parte)
+        if accion:
+            acciones.append({"accion": accion, "realizado": realizado})
+
+    return acciones
+
+
 def cargar_planilla(arch_name):
     secciones = {}
     arch = "arch/planilla/" + arch_name + ".txt"
@@ -304,7 +332,8 @@ def cargar_planilla(arch_name):
                     secciones[seccion_actual] = {
                         "subsecciones": [],
                         "encabezados": [],
-                        "items": []
+                        "items": [],
+                        "checklist": []
                     }
                     subseccion_actual = None
 
@@ -322,6 +351,10 @@ def cargar_planilla(arch_name):
                             "items": []
                         }
                         secciones[seccion_actual]["subsecciones"].append(nueva_subseccion)
+
+                elif linea.startswith("CHECKLIST:"):
+                    if seccion_actual:
+                        secciones[seccion_actual]["checklist"] = parsear_checklist(linea)
 
                 # Detecta ENCABEZADOS
                 elif linea.startswith("ENCABEZADOS:"):
