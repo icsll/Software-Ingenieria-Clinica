@@ -16,9 +16,7 @@ Etiquetado | Inspeccionar el estado de las etiquetas | |
 [CHECKLIST]
 CHECKLIST: Cambio de filtros|Cambio de celda de oxígeno|Cambio de boquillas de gases|Cambio de batería | Realizar prueba
 
-
 [EVALUACIÓN GENERAL DEL PREVENTIVO]
-ENCABEZADOS: Resultado final 
- | 
- Observaciones
+ENCABEZADOS: Resultado final | Observaciones
+Pasó |
  

@@ -321,6 +321,7 @@ def cargar_planilla(arch_name):
             subseccion_actual = None
             descripcion_subseccion = None
 
+            ultima_seccion = None
             for linea in f:
                 linea = linea.strip()
                 if not linea:
@@ -328,13 +329,20 @@ def cargar_planilla(arch_name):
 
                 # Separadores de SECCIÓN [...]
                 if linea.startswith("[") and linea.endswith("]"):
-                    seccion_actual = linea[1:-1]
+                    nombre_seccion = linea[1:-1].strip()
+                    if nombre_seccion.upper() == "CHECKLIST":
+                        seccion_actual = None
+                        subseccion_actual = None
+                        continue
+
+                    seccion_actual = nombre_seccion
                     secciones[seccion_actual] = {
                         "subsecciones": [],
                         "encabezados": [],
                         "items": [],
                         "checklist": []
                     }
+                    ultima_seccion = seccion_actual
                     subseccion_actual = None
 
                 # Separadores de SUBSECCIÓN == ... ==
@@ -355,6 +363,8 @@ def cargar_planilla(arch_name):
                 elif linea.startswith("CHECKLIST:"):
                     if seccion_actual:
                         secciones[seccion_actual]["checklist"] = parsear_checklist(linea)
+                    elif ultima_seccion:
+                        secciones[ultima_seccion]["checklist"] = parsear_checklist(linea)
 
                 # Detecta ENCABEZADOS
                 elif linea.startswith("ENCABEZADOS:"):

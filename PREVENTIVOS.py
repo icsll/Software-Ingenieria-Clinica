@@ -190,33 +190,81 @@ def agregarPREV(pdf):
 
             if encabezados and items:
                 ancho_total = 190
-                #anchos = _calcular_anchos(encabezados, ancho_total)
-                anchos = []
-                for col in encabezados:
-                    if col.lower().startswith("código") or col.lower().startswith("6."):
-                        anchos.append(12)   # código cortito
-                    elif col.lower().startswith("Ítem"):
-                        anchos.append(25)   # ítem medio
-                    elif "evaluación" in col.lower():
-                        anchos.append(60)   # evaluación grande 65
-                    elif "resultado final" in col.lower():
-                        anchos.append(ancho_total)   # resultado largo
-                    elif "resultado" in col.lower():
-                        anchos.append(20)   # resultado corto
-                    elif "Observación" in col.lower():
-                        anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
-                    else:
-                        # reparto ancho si no lo reconozco
-                        anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
-
-                # ENCABEZADOS
-                pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
                 
-                # FILAS
-                for item in items:
-                    fila = [str(item.get(col, "")) for col in encabezados]
-                    pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
-                    y = pdf.get_y()
+                es_evaluacion_general = "evaluación" in seccion.lower() and "general" in seccion.lower()
+                
+                if es_evaluacion_general:
+                    # Manejo especial para EVALUACIÓN GENERAL: mostrar resultado final y observaciones por separado
+                    for item in items:
+                        resultado_final = ""
+                        observacion = ""
+                        
+                        for col in encabezados:
+                            if "resultado" in col.lower():
+                                resultado_final = str(item.get(col, "")).strip()
+                            elif "observ" in col.lower():
+                                observacion = str(item.get(col, "")).strip()
+                        
+                        # 1. Mostrar Resultado final solo
+                        pdf.tabla(10, pdf.get_y(), [190], [["Resultado final"]], align="C")
+                        pdf.tabla(10, pdf.get_y(), [190], [[resultado_final]], align="C")
+                        
+                        # 2. Mostrar Observaciones como párrafo separado debajo del título
+                        if observacion:
+                            pdf.set_xy(10, pdf.get_y() + 4)
+                            pdf.set_font("Arial", "B", 10)
+                            pdf.cell(0, 5, "Observaciones:", border=0)
+
+                            pdf.set_xy(10, pdf.get_y() + 7)
+                            pdf.set_font("Arial", "", 9)
+                            pdf.multi_cell(180, 4, observacion, border=0, align="L")
+                        else:
+                            pdf.set_xy(10, pdf.get_y() + 4)
+                            pdf.set_font("Arial", "B", 10)
+                            pdf.cell(0, 5, "Observaciones:", border=0)
+                            pdf.set_y(pdf.get_y() + 6)
+                        
+                        y = pdf.get_y()
+                else:
+                    # Comportamiento normal para otras secciones
+                    anchos = []
+                    for col in encabezados:
+                        if col.lower().startswith("código") or col.lower().startswith("6."):
+                            anchos.append(12)   # código cortito
+                        elif col.lower().startswith("Ítem"):
+                            anchos.append(25)   # ítem medio
+                        elif "evaluación" in col.lower():
+                            anchos.append(60)   # evaluación grande 65
+                        elif "resultado final" in col.lower():
+                            anchos.append(ancho_total)   # resultado largo
+                        elif "resultado" in col.lower():
+                            anchos.append(20)   # resultado corto
+                        elif "Observación" in col.lower():
+                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
+                        else:
+                            # reparto ancho si no lo reconozco
+                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
+
+                    # ENCABEZADOS
+                    pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
+                    
+                    # FILAS
+                    for item in items:
+                        fila = [str(item.get(col, "")) for col in encabezados]
+                        pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
+                        y = pdf.get_y()
+
+                        observacion = ""
+                        for col in encabezados:
+                            if "observ" in col.lower():
+                                observacion = str(item.get(col, "")).strip()
+                                break
+
+                        if observacion:
+                            pdf.set_xy(15, y + 2)
+                            pdf.set_font("Arial", "I", 8)
+                            pdf.multi_cell(180, 4, f"Observación: {observacion}", border=0, align="L")
+                            pdf.set_font("Arial", "", 10)
             
             if y > 210:
                 pdf.add_page()
@@ -279,7 +327,8 @@ def ventanaPM(arch_name):
     notebook = ttk.Notebook(root)
     notebook.pack(fill="both", expand=True)
     entry_widgets = {}
-    checklist_vars = {}
+    todos_checklists = {}
+    checklist_vars_ui = {}
 
     for seccion, datos in secciones.items():
         # Frame principal con scroll
@@ -304,24 +353,11 @@ def ventanaPM(arch_name):
         container.columnconfigure(0, weight=1)
 
         entry_widgets[seccion] = []
-        checklist_vars[seccion] = []
         row_counter = 0
 
         checklist_items = datos.get("checklist", [])
         if checklist_items:
-            checklist_frame = ttk.LabelFrame(scroll_frame, text="Checklist de acciones", padding=10)
-            checklist_frame.grid(row=row_counter, column=0, columnspan=10, padx=10, pady=(10, 5), sticky="ew")
-            row_counter += 1
-
-            for checklist_item in checklist_items:
-                var = tk.BooleanVar(value=bool(checklist_item.get("realizado", False)))
-                cb = ttk.Checkbutton(
-                    checklist_frame,
-                    text=checklist_item.get("accion", ""),
-                    variable=var
-                )
-                cb.grid(row=len(checklist_vars[seccion]), column=0, sticky="w", pady=2)
-                checklist_vars[seccion].append((checklist_item, var))
+            todos_checklists[seccion] = checklist_items
 
         # Verificar si hay subsecciones
         subsecciones = datos.get("subsecciones", [])
@@ -397,10 +433,11 @@ def ventanaPM(arch_name):
                                 combo.grid(row=row_counter, column=j, padx=10, pady=5)
                                 fila_widgets[encabezado] = combo
 
-                            elif encabezado in ["Observaciones"]:
-                                entry = ttk.Entry(scroll_frame, width=15)
+                            elif "observ" in encabezado.lower():
+                                entry = ttk.Entry(scroll_frame, width=40)
                                 entry.insert(0, str(valor))
                                 entry.grid(row=row_counter, column=j, padx=10, pady=5)
+                                fila_widgets[encabezado] = entry
                                 
                             else:
                                 # Editable (Medición, Observación, etc)
@@ -459,6 +496,12 @@ def ventanaPM(arch_name):
                         combo.grid(row=row_counter, column=j, padx=10, pady=5)
                         fila_widgets[encabezado] = combo
 
+                    elif "observ" in encabezado.lower():
+                        entry = ttk.Entry(scroll_frame, width=40)
+                        entry.insert(0, valor)
+                        entry.grid(row=row_counter, column=j, padx=10, pady=5)
+                        fila_widgets[encabezado] = entry
+
                     else:
                         # Editable (Observación, Fecha, etc)
                         entry = ttk.Entry(scroll_frame, width=30)
@@ -469,6 +512,50 @@ def ventanaPM(arch_name):
                 entry_widgets[seccion].append((item, fila_widgets))
                 row_counter += 1
 
+    if todos_checklists:
+        checklist_container = ttk.Frame(notebook)
+        notebook.add(checklist_container, text="CHECKLIST")
+
+        canvas_check = tk.Canvas(checklist_container)
+        v_scroll_check = ttk.Scrollbar(checklist_container, orient="vertical", command=canvas_check.yview)
+        h_scroll_check = ttk.Scrollbar(checklist_container, orient="horizontal", command=canvas_check.xview)
+        scroll_frame_check = ttk.Frame(canvas_check)
+        scroll_frame_check.bind(
+            "<Configure>",
+            lambda e, c=canvas_check: c.configure(scrollregion=c.bbox("all"))
+        )
+        canvas_check.create_window((0, 0), window=scroll_frame_check, anchor="nw")
+        canvas_check.configure(yscrollcommand=v_scroll_check.set, xscrollcommand=h_scroll_check.set)
+        canvas_check.grid(row=0, column=0, sticky="nsew")
+        v_scroll_check.grid(row=0, column=1, sticky="ns")
+        h_scroll_check.grid(row=1, column=0, sticky="ew")
+        checklist_container.rowconfigure(0, weight=1)
+        checklist_container.columnconfigure(0, weight=1)
+
+        check_row = 0
+        for seccion, checklist_items in todos_checklists.items():
+            if checklist_items:
+                titulo_seccion = ttk.Label(
+                    scroll_frame_check,
+                    text=f"- {seccion}",
+                    font=("Helvetica", 10, "bold"),
+                    foreground="#0066cc"
+                )
+                titulo_seccion.grid(row=check_row, column=0, columnspan=2, pady=(15, 5), padx=10, sticky="w")
+                check_row += 1
+
+                checklist_vars_ui[seccion] = []
+                for checklist_item in checklist_items:
+                    var = tk.BooleanVar(value=bool(checklist_item.get("realizado", False)))
+                    cb = ttk.Checkbutton(
+                        scroll_frame_check,
+                        text=checklist_item.get("accion", ""),
+                        variable=var
+                    )
+                    cb.grid(row=check_row, column=0, columnspan=2, sticky="w", padx=20, pady=3)
+                    checklist_vars_ui[seccion].append((checklist_item, var))
+                    check_row += 1
+
     def guardar_y_cerrar():
         for seccion, filas in entry_widgets.items():
             for item, fila_widgets in filas:
@@ -478,7 +565,7 @@ def ventanaPM(arch_name):
                     elif isinstance(widget, ttk.Entry):
                         item[encabezado] = widget.get()
 
-        for seccion, checklist_items_vars in checklist_vars.items():
+        for seccion, checklist_items_vars in checklist_vars_ui.items():
             for item, var in checklist_items_vars:
                 item["realizado"] = bool(var.get())
 
