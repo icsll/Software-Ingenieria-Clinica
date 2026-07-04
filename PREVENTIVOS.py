@@ -227,44 +227,50 @@ def agregarPREV(pdf):
                         y = pdf.get_y()
                 else:
                     # Comportamiento normal para otras secciones
-                    anchos = []
-                    for col in encabezados:
-                        if col.lower().startswith("código") or col.lower().startswith("6."):
-                            anchos.append(12)   # código cortito
-                        elif col.lower().startswith("Ítem"):
-                            anchos.append(25)   # ítem medio
-                        elif "evaluación" in col.lower():
-                            anchos.append(60)   # evaluación grande 65
-                        elif "resultado final" in col.lower():
-                            anchos.append(ancho_total)   # resultado largo
-                        elif "resultado" in col.lower():
-                            anchos.append(20)   # resultado corto
-                        elif "Observación" in col.lower():
-                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
-                        else:
-                            # reparto ancho si no lo reconozco
-                            anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
-
-                    # ENCABEZADOS
-                    pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
-                    
-                    # FILAS
-                    for item in items:
-                        fila = [str(item.get(col, "")) for col in encabezados]
-                        pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
+                    if len(encabezados) == 1 and len(items) == 1:
+                        item = items[0]
+                        valor = str(item.get(encabezados[0], "")).strip()
+                        pdf.tabla(10, pdf.get_y(), [95, 95], [[encabezados[0], valor]], align="C")
                         y = pdf.get_y()
-
-                        observacion = ""
+                    else:
+                        anchos = []
                         for col in encabezados:
-                            if "observ" in col.lower():
-                                observacion = str(item.get(col, "")).strip()
-                                break
+                            if col.lower().startswith("código") or col.lower().startswith("6."):
+                                anchos.append(12)   # código cortito
+                            elif col.lower().startswith("Ítem"):
+                                anchos.append(25)   # ítem medio
+                            elif "evaluación" in col.lower():
+                                anchos.append(60)   # evaluación grande 65
+                            elif "resultado final" in col.lower():
+                                anchos.append(ancho_total)   # resultado largo
+                            elif "resultado" in col.lower():
+                                anchos.append(20)   # resultado corto
+                            elif "Observación" in col.lower():
+                                anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))   # resultado corto                    
+                            else:
+                                # reparto ancho si no lo reconozco
+                                anchos.append((ancho_total - sum(anchos)) / (len(encabezados) - len(anchos)))
 
-                        if observacion:
-                            pdf.set_xy(15, y + 2)
-                            pdf.set_font("Arial", "I", 8)
-                            pdf.multi_cell(180, 4, f"Observación: {observacion}", border=0, align="L")
-                            pdf.set_font("Arial", "", 10)
+                        # ENCABEZADOS
+                        pdf.tabla(10, pdf.get_y(), anchos, [encabezados], align="C")
+                        
+                        # FILAS
+                        for item in items:
+                            fila = [str(item.get(col, "")) for col in encabezados]
+                            pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
+                            y = pdf.get_y()
+
+                            observacion = ""
+                            for col in encabezados:
+                                if "observ" in col.lower():
+                                    observacion = str(item.get(col, "")).strip()
+                                    break
+
+                            if observacion:
+                                pdf.set_xy(15, y + 2)
+                                pdf.set_font("Arial", "I", 8)
+                                pdf.multi_cell(180, 4, f"Observación: {observacion}", border=0, align="L")
+                                pdf.set_font("Arial", "", 10)
             
             if y > 210:
                 pdf.add_page()
