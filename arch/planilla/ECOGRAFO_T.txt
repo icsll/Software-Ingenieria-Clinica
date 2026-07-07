@@ -1,0 +1,9 @@
+[LIMPIEZA DE FILTROS]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Filtros | Revisar y limpiar filtros
+[BASE DE DATOS]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Memoria | Realizar limpieza de base de datos
+[EVALUACIÓN GENERAL DEL PREVENTIVO]
+ENCABEZADOS: Resultado final | Observaciones
+Pasó |

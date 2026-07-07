@@ -46,7 +46,15 @@ opcion = questionary.select(
     ]
 ).ask()
 if opcion == "s":
-    PREVENTIVOS.agregarPREV(pdf)
+    frecuencia = questionary.select(
+    "De que tipo?",
+        choices=[
+         questionary.Choice(title="Anual", value="A"),
+         questionary.Choice(title="Semestral", value="S"),
+         questionary.Choice(title="Trimestral", value="T")
+         ]    
+    ).ask()
+    PREVENTIVOS.agregarPREV(pdf,frecuencia)
 
 funciones.agregar_imagen(pdf)
 

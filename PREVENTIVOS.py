@@ -115,18 +115,18 @@ def planillaBase(pdf):
     
     return pdf.get_y()
 
-def agregarPREV(pdf):
+def agregarPREV(pdf,frecuencia):
     
     y = planillaBase(pdf)
 
-    nombre_archivo = f"{parametros.tipoEquipo}.txt"
+    nombre_archivo = f"{parametros.tipoEquipo}_{frecuencia}.txt"
     ruta_base = Path('arch') / 'planilla'
     ruta_completa = ruta_base / nombre_archivo
     if not ruta_completa.is_file():
         print(f"No se encontró el archivo de equipo: {ruta_completa}")
         crear_planillaPM()
-
-    respuestas = ventanaPM(parametros.tipoEquipo)
+    arch_name = f"{parametros.tipoEquipo}_{frecuencia}"
+    respuestas = ventanaPM(arch_name)
 
     for seccion, datos in respuestas.items():
         # Sección principal
@@ -197,27 +197,27 @@ def agregarPREV(pdf):
                     # Manejo especial para EVALUACIÓN GENERAL: mostrar resultado final y observaciones por separado
                     for item in items:
                         resultado_final = ""
-                        observacion = ""
+                        observaciones = ""
                         
                         for col in encabezados:
                             if "resultado" in col.lower():
                                 resultado_final = str(item.get(col, "")).strip()
-                            elif "observ" in col.lower():
-                                observacion = str(item.get(col, "")).strip()
+                            elif "observaciones" in col.lower():
+                                observaciones = str(item.get(col, "")).strip()
                         
                         # 1. Mostrar Resultado final solo
                         pdf.tabla(10, pdf.get_y(), [190], [["Resultado final"]], align="C")
                         pdf.tabla(10, pdf.get_y(), [190], [[resultado_final]], align="C")
                         
                         # 2. Mostrar Observaciones como párrafo separado debajo del título
-                        if observacion:
+                        if observaciones:
                             pdf.set_xy(10, pdf.get_y() + 4)
                             pdf.set_font("Arial", "B", 10)
                             pdf.cell(0, 5, "Observaciones:", border=0)
 
                             pdf.set_xy(10, pdf.get_y() + 7)
                             pdf.set_font("Arial", "", 9)
-                            pdf.multi_cell(180, 4, observacion, border=0, align="L")
+                            pdf.multi_cell(180, 4, observaciones, border=0, align="L")
                         else:
                             pdf.set_xy(10, pdf.get_y() + 4)
                             pdf.set_font("Arial", "B", 10)
@@ -260,17 +260,17 @@ def agregarPREV(pdf):
                             pdf.tabla(pdf.get_x(), pdf.get_y(), anchos, [fila], align="C")
                             y = pdf.get_y()
 
-                            observacion = ""
-                            for col in encabezados:
-                                if "observ" in col.lower():
-                                    observacion = str(item.get(col, "")).strip()
-                                    break
+                            # observaciones = ""
+                            # for col in encabezados:
+                            #     if "observ" in col.lower():
+                            #         observaciones = str(item.get(col, "")).strip()
+                            #         break
 
-                            if observacion:
-                                pdf.set_xy(15, y + 2)
-                                pdf.set_font("Arial", "I", 8)
-                                pdf.multi_cell(180, 4, f"Observación: {observacion}", border=0, align="L")
-                                pdf.set_font("Arial", "", 10)
+                            # if observaciones:
+                            #     pdf.set_xy(15, y + 2)
+                            #     pdf.set_font("Arial", "I", 8)
+                            #     pdf.multi_cell(180, 4, f"Observaciónes: {observaciones}", border=0, align="L")
+                            #     pdf.set_font("Arial", "", 10)
             
             if y > 210:
                 pdf.add_page()
