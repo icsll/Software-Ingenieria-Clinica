@@ -4,7 +4,7 @@ Codigo    | Descripcion                  | Edificio  | Sector       | Modelo/Ser
 MON-BIO-91742519 | Monitor Mult. Welch Allyn Connex Spot #100091742519 | Angelus | Internación | Connex Spot #100091742519 | IG-LL-ANG-PB-INT-LL-HAB00           
 MON-BIO-91642519 | Monitor Mult. Welch Allyn Connex Spot #100091642519 | Angelus | Internación | Connex Spot #100091642519 | IG-LL-ANG-PB-INT-LL-HAB00        
 MON-BIO-91835519 | Monitor Mult. Welch Allyn Connex Spot #100091832519 | Sanatorio | Internación | Connex Spot #100091832519 | IG-LL-SLL-02-INT-LL-HAB00      
-MON-BIO-91802519 | Monitor Mult. Welch Allyn Connex Spot #100091802519 | Sanatorio | Unidad Coronaria | Connex Spot #100091802519 | IG-LL-SLL-01-UCO-LL-HAB00      
+MON-BIO-91802519 | Monitor Mult. Welch Allyn Connex Spot #100091802519 | Sanatorio | Internación | Connex Spot #100091802519 | IG-LL-SLL-01-INT-LL-HAB00      
 MON-BIO-30305019 | Monitor Mult. Welch Allyn Connex Spot #100030305019 | Sanatorio | Internación | Connex Spot #100030305019 | IG-LL-SLL-02-INT-LL-HAB00
 MON-BIO-91672519 | Monitor Mult. Welch Allyn Connex Spot #100091672519 | Angelus | Hospital de dia | Connex Spot #100091672519 | IG-LL-ANG-PB-INT-LL-HDSAA      
 MON-BIO-91692519 | Monitor Mult. Welch Allyn Connex Spot #100091692519 | Sanatorio | Internación | Connex Spot #100091692519 | IG-LL-SLL-02-INT-LL-HAB00      

@@ -1,0 +1,26 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo | | 
+Pantalla | Revisar funcionamiento de pantalla y panel de control | | 
+Fecha y Hora | Verificar que la fecha y hora del equipo estén configuradas correctamente | | 
+Accesorios | Revisar estado de cables y casete espiratorio, reemplazar de ser necesario | | 
+Alarmas | Verificar que las alarmas correspondientes al equipo se activen de forma correcta y que los indicadores visuales y auditivos sean reconocibles | | 
+Limpieza | Realizar limpieza exterior e interior del equipo | | 
+Cable de alimentación | Inspeccionar el estado de cable, fuente y enchufe | | 
+Batería | Cambio de batería si corresponde | | 
+Conectividad | Verificar conexión a central de monitoreo | | 
+Anclaje | Verificar estado del soporte | | 
+Ruedas | Verificar buen desplazamiento y estado | | 
+Etiquetado | Inspeccionar el estado de las etiquetas | |
+
+[CHECKLIST]
+CHECKLIST: Cambio de filtros|Cambio de celda de oxígeno|Cambio de boquillas de gases|Cambio de batería | Realizar prueba
+
+[HORAS OPERATIVAS]
+ENCABEZADOS: Horas de funcionamiento 
+ | 
+
+[EVALUACIÓN GENERAL DEL PREVENTIVO]
+ENCABEZADOS: Resultado final | Observaciones
+Pasó |
+ 
