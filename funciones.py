@@ -1,6 +1,7 @@
 
 import re # expresiones regulares (buscar, validar, reemplazar texto).
 import os # manejo de rutas de archivos
+import csv # para leer archivos CSV (base de datos) 
 from fpdf import FPDF # manejo y generacion de PDF
 import questionary
 from questionary import Choice
@@ -122,55 +123,90 @@ import parametros
 
 def mostrar_arch_equipo(arch_name):
     """
-    Muestra las líneas de un archivo de equipos para selección, incluyendo 'Nuevo equipo'.
+    Muestra las líneas de un archivo de equipos (soporta .txt y .csv).
     Almacena Edificio, Sector, Marca, Modelo, y SN en 'parametros', y retorna el Código (ID).
-    (Ajustado para 6 columnas: Código | Descripción | Edificio | Sector | Modelo/Serie | Ubicación)
     """
-    arch = "arch/" + arch_name + ".txt"
+    arch_base = "arch/" + arch_name
+    arch_txt = arch_base + ".txt"
+    arch_csv = arch_base + ".csv"
+    
     lineas_filtradas = []
     
     try:
-        with open(arch, 'r', encoding='utf-8') as f:
-            for linea in f:
-                lineas_filtradas.append(linea.strip())
-        
+        # 1. Priorizar lectura de CSV si existe, sino usar TXT
+        if os.path.exists(arch_csv):
+            arch = arch_csv
+            # Intentamos leer primero como UTF-8. Si falla por acentos/eñes, usamos latin-1
+            try:
+                with open(arch, 'r', encoding='utf-8') as f:
+                    primera_linea = f.readline()
+                    delimitador = ';' if ';' in primera_linea else ','
+                    f.seek(0)
+                    lector_csv = csv.reader(f, delimiter=delimitador)
+                    for fila in lector_csv:
+                        if fila:
+                            lineas_filtradas.append(" | ".join(campo.strip() for campo in fila))
+            except UnicodeDecodeError:
+                with open(arch, 'r', encoding='latin-1') as f:
+                    primera_linea = f.readline()
+                    delimitador = ';' if ';' in primera_linea else ','
+                    f.seek(0)
+                    lector_csv = csv.reader(f, delimiter=delimitador)
+                    for fila in lector_csv:
+                        if fila:
+                            lineas_filtradas.append(" | ".join(campo.strip() for campo in fila))
+                        
+        elif os.path.exists(arch_txt):
+            arch = arch_txt
+            try:
+                with open(arch, 'r', encoding='utf-8') as f:
+                    for linea in f:
+                        lineas_filtradas.append(linea.strip())
+            except UnicodeDecodeError:
+                with open(arch, 'r', encoding='latin-1') as f:
+                    for linea in f:
+                        lineas_filtradas.append(linea.strip())
+        else:
+            print(f"No se encontró el archivo ni como .txt ni como .csv para '{arch_name}'.")
+            return None
+
         if not lineas_filtradas:
             print("No hay equipos para mostrar en el archivo.")
             return None
         
-        # 1. Crear la lista de opciones (Choice objects)
+        # 2. Crear la lista de opciones (Choice objects)
         opciones_questionary = []
-        for linea in lineas_filtradas:
+        for i, linea in enumerate(lineas_filtradas):
             linea_limpia = linea.strip()
             
-            # Deshabilitar encabezados y separadores, pero permitir la selección de "Nuevo equipo"
-            if linea_limpia.startswith("Codigo") or linea_limpia.startswith("---"):
+            # Deshabilitar encabezados
+            es_encabezado_csv = os.path.exists(arch_csv) and i == 0
+            if linea_limpia.startswith("Codigo") or linea_limpia.startswith("---") or es_encabezado_csv:
                 opcion = Choice(title=linea_limpia, value=linea_limpia, disabled=True)
             else:
                 opcion = Choice(title=linea_limpia, value=linea_limpia, disabled=False)
             
             opciones_questionary.append(opcion)
 
-        # 2. Obtener la selección
+        # 3. Obtener la selección
         seleccion = questionary.select(
             "Seleccione un equipo de la lista o use las flechas para navegar:",
             choices=opciones_questionary
         ).ask()
 
         # --- Lógica de Extracción y Asignación ---
-        if seleccion == "Nuevo equipo":
+        if seleccion == "Nuevo equipo" or seleccion is None:
             return "Nuevo equipo"
         
-        # 3. Separar los campos por el delimitador " | " (pipe con espacios)
-        # Índice: [0] Código, [1] Descripción, [2] Edificio, [3] Sector, [4] Modelo/Serie, [5] Ubicación
+        # 4. Separar los campos por el delimitador " | " 
         campos = [c.strip() for c in seleccion.split('|')]
         
-        # 4. Verificar el número de campos (Esperamos 6)
+        # 5. Verificar el número de campos (Esperamos 6)
         if len(campos) < 6:
             print(f"\n¡Error de formato! La línea no tiene suficientes campos (Esperado: 6): {seleccion}\n")
             return None
             
-        # 5. Extraer datos usando los índices correctos para 6 columnas
+        # 6. Extraer datos
         codigo = campos[0]
         descripcion_completa = campos[1] 
         edificio = campos[2] 
@@ -178,7 +214,7 @@ def mostrar_arch_equipo(arch_name):
         modelo_sn_completo = campos[4] 
         ubicacion = campos[5]
 
-        # 6. Procesar Modelo/Serie para separar Modelo y SN (ANTES ERA PASO 7)
+        # 7. Procesar Modelo/Serie
         if '#' in modelo_sn_completo:
             modelo, sn = modelo_sn_completo.split('#', 1)
             modelo = modelo.strip()
@@ -187,10 +223,9 @@ def mostrar_arch_equipo(arch_name):
             modelo = modelo_sn_completo.strip()
             sn = ""
             
-        # La Marca es el texto restante de la descripción_completa al eliminar modelo_sn_completo.
         marca = descripcion_completa.replace(modelo_sn_completo, '').strip()
 
-        # 8. Almacenar en las variables de 'parametros'
+        # 8. Almacenar en las variables
         parametros.sedeEEM = edificio
         parametros.sectorEEM = sector
         parametros.ubicacionEEM = ubicacion
@@ -198,37 +233,36 @@ def mostrar_arch_equipo(arch_name):
         parametros.modeloEEM = modelo
         parametros.snEEM = sn
 
-        # 9. Retornar el Código (ID)
         return codigo
 
-    except FileNotFoundError:
-        print(f"El archivo '{arch}' no existe.")
-        return None
     except Exception as e:
         print(f"Ocurrió un error al procesar la selección: {e}")
         return None
 
-"""
-seleccionar_archivo_equipo():
-Permite al usuario seleccionar un archivo de equipo de la carpeta "arch/equipos".
-"""
+
 def seleccionar_archivo_equipo():
+    """
+    Permite al usuario seleccionar un archivo de equipo de la carpeta "arch/equipos".
+    (Modificado para soportar .txt y .csv)
+    """
     carpeta = "arch/equipos"
     try:
-        archivos = [f for f in os.listdir(carpeta) if f.endswith(".txt")]
+        # Buscar ambos tipos de formato
+        archivos = [f for f in os.listdir(carpeta) if f.endswith((".txt", ".csv"))]
         if not archivos:
-            print("No hay archivos .txt en la carpeta.")
+            print("No hay archivos .txt ni .csv en la carpeta.")
             return None
 
-        # Remover la extensión .txt para mostrar
-        nombres_visibles = [os.path.splitext(f)[0] for f in archivos]
+        # Remover la extensión para mostrar en UI. 
+        # Usamos set() para no duplicar opciones si existe tanto .txt como .csv del mismo equipo.
+        nombres_visibles = sorted(list(set(os.path.splitext(f)[0] for f in archivos)))
 
         seleccion = questionary.select(
             "Seleccione equipo a ensayar:",
             choices=nombres_visibles
         ).ask()
 
-        return seleccion  # Retorna el nombre sin .txt
+        return seleccion 
 
     except FileNotFoundError:
         print(f"La carpeta '{carpeta}' no existe.")
