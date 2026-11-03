@@ -223,7 +223,7 @@ def mostrar_arch_equipo(arch_name):
             modelo = modelo_sn_completo.strip()
             sn = ""
             
-        marca = descripcion_completa.replace(modelo_sn_completo, '').strip()
+        marca = descripcion_completa.replace(modelo_sn_completo, '').strip()   
 
         # 8. Almacenar en las variables
         parametros.sedeEEM = edificio

@@ -1,0 +1,3 @@
+[INSPECCIÓN VISUAL Y FUNCIONAL]
+ENCABEZADOS: Ítem | Evaluación | Resultado | Observación
+Chasis | No debe haber daños en la carcasa del equipo | apto | 
