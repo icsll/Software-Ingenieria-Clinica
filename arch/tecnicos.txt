@@ -8,3 +8,5 @@ Milagros Casademunt
 imagenes/firmas/mili.png
 Malena Hidalgo
 imagenes/firmas/male.png
+"C:\Users\INGENIERIA CLINICA\AppData\Local\Programs\Python\Python313\python.exe" "c:/Users/INGENIERIA CLINICA/Documents/Soft 2.0/Software-Ingenieria-Clinica/Main.py"
+C:\Users\INGENIERIA CLINICA\Documents\Soft 2.0\Software-Ingenieria-Clinica\ 

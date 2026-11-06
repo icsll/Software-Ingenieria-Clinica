@@ -213,6 +213,7 @@ def mostrar_arch_equipo(arch_name):
         sector = campos[3]
         modelo_sn_completo = campos[4] 
         ubicacion = campos[5]
+        marca = campos[6]
 
         # 7. Procesar Modelo/Serie
         if '#' in modelo_sn_completo:
@@ -223,7 +224,7 @@ def mostrar_arch_equipo(arch_name):
             modelo = modelo_sn_completo.strip()
             sn = ""
             
-        marca = descripcion_completa.replace(modelo_sn_completo, '').strip()   
+        #marca = descripcion_completa.replace(modelo_sn_completo, '').strip()   
 
         # 8. Almacenar en las variables
         parametros.sedeEEM = edificio
